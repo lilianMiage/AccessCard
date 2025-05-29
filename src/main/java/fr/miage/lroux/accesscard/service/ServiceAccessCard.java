@@ -30,7 +30,7 @@ public class ServiceAccessCard {
     public AccessCard createAccessCard(AccessCard accessCard) throws IllegalArgumentException {
         Optional<AccessCard> accessCardOptional = repoAccessCard.findById(accessCard.getCardId());
         if (accessCardOptional.isPresent()){
-            throw new IllegalArgumentException("An access card with this ID already exist" + accessCard.getCardId());
+            throw new IllegalArgumentException("An access card with this ID already exist " + accessCard.getCardId());
         }
         repoAccessCard.save(accessCard);
         return accessCard;
@@ -62,4 +62,6 @@ public class ServiceAccessCard {
         }
         repoAccessCard.deleteById(id);
     }
+
+
 }
