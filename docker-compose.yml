@@ -34,7 +34,7 @@ services:
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
       SPRING_JPA_HIBERNATE_DDL_AUTO: none
     ports:
-      - "8084:8080"
+      - "8084:8084"
     networks:
       - mynetwork
 

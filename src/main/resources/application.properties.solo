@@ -1,0 +1,7 @@
+spring.application.name=AccessCard
+
+server.port=8084
+
+eureka.client.serviceUrl.defaultZone=http://host.docker.internal:8000/eureka/
+eureka.instance.leaseRenewalIntervalInSeconds=10
+eureka.instance.leaseExpirationDurationInSeconds=30
