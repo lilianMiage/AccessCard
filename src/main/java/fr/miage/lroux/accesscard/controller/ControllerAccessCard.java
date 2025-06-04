@@ -37,7 +37,7 @@ public class ControllerAccessCard {
      * @return The access card with the specified ID.
      * @throws Exception If the access card does not exist.
      */
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public AccessCard getAccessCardById(@PathVariable Long id) throws Exception {
         return serviceAccessCard.getAccessCardById(id);
     }
@@ -47,7 +47,7 @@ public class ControllerAccessCard {
      * @param id The ID of the access card to delete.
      * @throws Exception If the access card does not exist.
      */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteAccessCardById(@PathVariable Long id) throws Exception {
         serviceAccessCard.deleteAccessCardById(id);
     }
