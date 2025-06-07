@@ -62,4 +62,12 @@ public class ServiceAccessCard {
         }
         repoAccessCard.deleteById(id);
     }
+
+    public AccessCard getByUserid(Long userId) throws Exception {
+        Optional<AccessCard> accessCardOptional = repoAccessCard.findByUserId(userId);
+        if (accessCardOptional.isEmpty()){
+            throw new Exception("No user associate with this access Card");
+        }
+        return accessCardOptional.get();
+    }
 }
