@@ -27,7 +27,7 @@ public class AccessCard {
     /**
      * User associated with the Access Card.
      */
-    private int userId;
+    private long userId;
 
     /**
      * Default constructor for JPA.
@@ -51,7 +51,7 @@ public class AccessCard {
      * @param password Access Card password
      * @param userId    User associated with the Access Card
      */
-    public AccessCard(long cardId, int password,int userId) {
+    public AccessCard(long cardId, int password,long userId) {
         this.cardId = cardId;
         this.password = password;
         this.userId = userId;
