@@ -7,8 +7,6 @@ import lombok.Data;
 /**
  * Entity representing an Access Card.
  */
-@Data
-@Builder
 @Entity
 public class AccessCard {
 
@@ -16,8 +14,8 @@ public class AccessCard {
      * Access Card ID.
      */
     @Id
-    @GeneratedValue
-    private long cardId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long accessCardId;
 
     /**
      * Access Card password.
@@ -47,25 +45,47 @@ public class AccessCard {
     /**
      * Constructor for AccessCard with cardId, password and user.
      *
-     * @param cardId  Access Card ID
+     * @param accessCardId  Access Card ID
      * @param password Access Card password
      * @param userId    User associated with the Access Card
      */
-    public AccessCard(long cardId, int password,long userId) {
-        this.cardId = cardId;
+    public AccessCard(long accessCardId, int password,long userId) {
+        this.accessCardId = accessCardId;
         this.password = password;
         this.userId = userId;
     }
 
     /**
      * Get the Access Card ID.
-     *
      * @return the Access Card ID
      */
-    public long getCardId() {
-        return cardId;
+    public long getAccessCardId() {
+        return accessCardId;
     }
 
+    /**
+     * Set the Access Card ID.
+     * @param accessCardId the Access Card ID
+     */
+    public void setAccessCardId(long accessCardId) {
+        this.accessCardId = accessCardId;
+    }
+
+    /**
+     * Get the User ID associated with the Access Card.
+     * @return the User ID
+     */
+    public long getUserId() {
+        return userId;
+    }
+
+    /**
+     * Set the User ID associated with the Access Card.
+     * @param userId the User ID
+     */
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     /**
      * Get the Access Card password.
@@ -75,13 +95,6 @@ public class AccessCard {
         return password;
     }
 
-    /**
-     * Set the Access Card ID.
-     * @param cardId the Access Card ID
-     */
-    public void setCardId(long cardId) {
-        this.cardId = cardId;
-    }
 
 
     /**
