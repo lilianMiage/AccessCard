@@ -50,7 +50,7 @@ class AccessCardControllerTests {
 	 */
 	@BeforeEach
 	public void setUp(){
-		accessCard = new AccessCard(new Random().nextInt());
+		accessCard = new AccessCard(123);
 		accessCard = repoAccessCard.save(accessCard);
 	}
 
@@ -87,8 +87,23 @@ class AccessCardControllerTests {
 	 */
 	@Test
 	public void deleteAccessByid() throws Exception {
-		mvc.perform(delete("/api/accessCard/delete/1"))
+		mvc.perform(delete("/api/accessCard/1"))
 				.andExpect(status().isOk());
 	}
+
+	/**
+	 * Tests the retrieval of an AccessCard by user ID.
+	 * This test checks if the correct AccessCard is returned when searching by user ID.
+	 */
+	@Test
+	public void getAccessCardByUserId() throws Exception {
+		accessCard.setUserId(1L);
+		repoAccessCard.save(accessCard);
+		mvc.perform(get("/api/accessCard/user/1"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.userId", is(1)))
+				.andExpect(jsonPath("$.password", is(accessCard.getPassword())));
+	}
+
 
 }

@@ -28,9 +28,9 @@ public class ServiceAccessCard {
      * @throws IllegalArgumentException If an access card with the same ID already exists.
      */
     public AccessCard createAccessCard(AccessCard accessCard) throws IllegalArgumentException {
-        Optional<AccessCard> accessCardOptional = repoAccessCard.findById(accessCard.getCardId());
+        Optional<AccessCard> accessCardOptional = repoAccessCard.findById(accessCard.getAccessCardId());
         if (accessCardOptional.isPresent()){
-            throw new IllegalArgumentException("An access card with this ID already exist " + accessCard.getCardId());
+            throw new IllegalArgumentException("An access card with this ID already exist " + accessCard.getAccessCardId());
         }
         repoAccessCard.save(accessCard);
         return accessCard;
@@ -63,6 +63,12 @@ public class ServiceAccessCard {
         repoAccessCard.deleteById(id);
     }
 
+    /**
+     * Retrieves an access card by the associated user ID.
+     * @param userId The ID of the user associated with the access card.
+     * @return The access card associated with the specified user ID.
+     * @throws Exception If no access card is associated with the given user ID.
+     */
     public AccessCard getByUserid(Long userId) throws Exception {
         Optional<AccessCard> accessCardOptional = repoAccessCard.findByUserId(userId);
         if (accessCardOptional.isEmpty()){

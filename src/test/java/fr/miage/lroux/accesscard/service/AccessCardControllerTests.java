@@ -27,7 +27,7 @@ public class AccessCardControllerTests {
     @BeforeEach
     public void setUp() {
         accessCard = new AccessCard();
-        accessCard.setCardId(1L);
+        accessCard.setAccessCardId(1L);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class AccessCardControllerTests {
 
         // Assert
         assertNotNull(result);
-        assertEquals(accessCard.getCardId(), result.getCardId());
+        assertEquals(accessCard.getAccessCardId(), result.getAccessCardId());
         verify(repoAccessCard).findById(1L);
         verify(repoAccessCard).save(accessCard);
     }
@@ -72,7 +72,7 @@ public class AccessCardControllerTests {
 
         // Assert
         assertNotNull(result);
-        assertEquals(accessCard.getCardId(), result.getCardId());
+        assertEquals(accessCard.getAccessCardId(), result.getAccessCardId());
         verify(repoAccessCard).findById(1L);
     }
 
@@ -118,5 +118,33 @@ public class AccessCardControllerTests {
         verify(repoAccessCard, never()).deleteById(anyLong());
     }
 
+    @Test
+    public void testGetAccessCardByUserId_WhenCardExists_ShouldReturnCard() throws Exception {
+        // Arrange
+        accessCard.setUserId(2L);
+        when(repoAccessCard.findByUserId(2L)).thenReturn(Optional.of(accessCard));
+
+        // Act
+        AccessCard result = serviceAccessCard.getByUserid(2L);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(2L, result.getUserId());
+        verify(repoAccessCard).findByUserId(2L);
+    }
+
+    @Test
+    public void testGetAccessCardByUserId_WhenCardDoesNotExist_ShouldThrowException() {
+        // Arrange
+        when(repoAccessCard.findByUserId(2L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        Exception exception = assertThrows(Exception.class, () -> {
+            serviceAccessCard.getByUserid(2L);
+        });
+
+        assertEquals("No user associate with this access Card", exception.getMessage());
+        verify(repoAccessCard).findByUserId(2L);
+    }
 
 }
